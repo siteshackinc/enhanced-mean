@@ -1,0 +1,42 @@
+<section>
+  <div class="page-header">
+    <h1>{{vm.article._id ? 'Edit Article' : 'New Article'}}</h1>
+  </div>
+  <div class="col-md-12">
+    <form name="vm.form.articleForm" class="form-horizontal" ng-submit="vm.save(vm.form.articleForm.$valid)" novalidate>
+      <fieldset>
+        <div class="form-group" show-errors>
+          <label class="control-label" for="title"><h4>Title</h4></label>
+          <input name="title" type="text" ng-model="vm.article.title" id="title" class="form-control" placeholder="Title" required>
+          <div ng-messages="vm.form.articleForm.title.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Article title is required.</p>
+          </div>
+        </div>
+        <div class="form-group" show-errors>
+          <label><h4>Created on Date</h4></label>
+          <div class="input-group">
+            <span class="input-group-btn" id="created"><button type="button" class="btn btn-default" ng-click="openCalendar($event, prop)"><i class="fa fa-calendar"></i></button></span>
+            <input type="text" aria-describedby="created" name="created" class="form-control" datetime-picker="MMMM dd, yyyy" enable-time="true" ng-model="vm.article.created" placeholder="Click icon to select blog date" datepicker-options="dateOptions" is-open="isOpen" disabled required>
+          </div>
+          <div ng-messages="vm.form.articleForm.created.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Created on Date is required.</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="intro"><h4>Intro <small>This is displayed on the Articles List</small></h4></label>
+          <summernote name="intro" config="summeroptions" ng-model="vm.article.intro" id="intro"></summernote>
+        </div>
+        <div class="form-group">
+          <label for="content"><h4>Content <small>This is displayed after the Intro when the user visits the article</small></h4></label>
+          <summernote name="content" config="summeroptions" ng-model="vm.article.content" id="content"></summernote>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-default">{{vm.article._id ? 'Update' : 'Create'}}</button>
+        </div>
+        <div ng-show="vm.error" class="text-danger">
+          <strong ng-bind="vm.error"></strong>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</section>

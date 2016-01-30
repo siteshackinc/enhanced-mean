@@ -1,0 +1,15 @@
+<section>
+  <div class="page-header">
+    <h1 ng-bind="vm.article.title"></h1>
+  </div>
+  <small>Posted on {{ article.created | date:'mediumDate'}} by <span ng-if="article.user" ng-bind="article.user.displayName"></span><span ng-if="!article.user">Deleted User</span></small>
+  <div ng-show="vm.authentication.user._id == vm.blog.user._id" class="pull-right">
+    <div class="btn-group btn-group-sm" role="group" aria-label="functions">
+      <a class="btn btn-warning btn-sm" ui-sref="articles.edit({articleId: vm.article._id})"><i class="fa fa-edit fa-fw"></i></a>
+      <a class="btn btn-danger btn-sm" ng-click="vm.remove();"><i class="fa fa-trash fa-fw"></i></a>
+    </div>
+  </div>
+  <div ng-bind-html="vm.article.intro"></div>
+  <div ng-bind-html="vm.article.content"></div>
+  <p><a ui-sref="articles.list" class="btn btn-default btn-sm">back to articles</a></p>
+</section>
